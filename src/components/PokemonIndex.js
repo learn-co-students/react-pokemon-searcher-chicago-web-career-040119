@@ -3,19 +3,15 @@ import PokemonCollection from './PokemonCollection'
 import PokemonForm from './PokemonForm'
 import { Search } from 'semantic-ui-react'
 import _ from 'lodash'
-import Filter from './Filter.js'
 
 class PokemonPage extends React.Component {
   constructor() {
     super()
       this.state = {
-        search: '',
         pokemons: [],
-
         filter: ''
       }
   }
-
   componentDidMount() {
     fetch(`http://localhost:3000/pokemon`)
       .then(resp => resp.json())
@@ -26,37 +22,37 @@ class PokemonPage extends React.Component {
       })
   }
 
-  //// search function //////
-  handleSearchChange =(event, {value}) => {
-    this.setState({filter: value})
+  // functions from Noa's artwork lab /////
+  handleSearchChange = event => {
+    this.setState({
+      filter: event.target.value
+    })
   }
 
-  // functions from Noa's artwork lab /////
-  getSearchInput = event => {
+  addPokemon =(pokemon)=> {
     this.setState({
-      search: event.target.value
+      pokemons: [...this.state.pokemon, pokemon]
     })
   }
 
   render() {
+    const filteredPokemon=this.state.pokemons.filter(pokemon => pokemon.name.includes(this.state.filter))
 
-    const filteredPokemon = this.state.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.state.search))
-    console.log(filteredPokemon)
+    // console.log(filteredPokemon)
     return (
-      <div>
-        <h1>Pokemon Searcher</h1>
-        <br />
-        <Filter getSearchInput={this.searchInput} search={this.state.search}/>
+        <div>
+          <h1>Pokemon Searcher</h1><br/>
+          <PokemonForm addPokemon={this.addPokemon} />
 
-        <Search onSearchChange={this.handleSearchChange} showNoResults={false} /><br />
-        {/*we only pass in the pokemons that match the value entered in the search*/}
-        <PokemonCollection
-        pokemons={filteredPokemon}
-        key={this.state.pokemons.name}
-        />
-        <br />
-        <PokemonForm />
-      </div>
+          <Search
+          onSearchChange={this.handleSearchChange}
+          filter={this.state.filter}/><br />
+          {/*we only pass in the pokemons that match the value entered in the search*/}
+          <PokemonCollection
+          pokemons={filteredPokemon}
+          /><br/>
+
+        </div>
     )
   }
 }
