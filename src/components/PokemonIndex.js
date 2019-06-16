@@ -5,16 +5,43 @@ import { Search } from 'semantic-ui-react'
 import _ from 'lodash'
 
 class PokemonPage extends React.Component {
+  state = {
+    pokemons: [],
+    search: ""
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/pokemon")
+    .then(resp => resp.json())
+    .then(poke => this.setState({
+      pokemons: poke
+    }))
+  }
+
+  getSeachInput =  (e, {value})  => {
+    this.setState({
+      search: value
+    })
+  }
+
+  addPokemon = (pokemon) => {
+    this.setState({
+      pokemons: [...this.state.pokemons, pokemon]
+    })
+  }
+
+
   render() {
+    const desiredPokemon = this.state.pokemons.filter(pokemon => pokemon.name.includes(this.state.search))
     return (
       <div>
         <h1>Pokemon Searcher</h1>
         <br />
-        <Search onSearchChange={_.debounce(() => console.log('🤔'), 500)} showNoResults={false} />
+        <Search onSearchChange={this.getSeachInput} showNoResults={false} />
         <br />
-        <PokemonCollection />
+        <PokemonCollection pokemons={desiredPokemon}/>
         <br />
-        <PokemonForm />
+        <PokemonForm  addPokemon={this.addPokemon} />
       </div>
     )
   }
