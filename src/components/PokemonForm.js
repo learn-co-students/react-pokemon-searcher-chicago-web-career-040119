@@ -41,6 +41,7 @@ class PokemonForm extends React.Component {
     })
     .then(resp => resp.json())
     .then(pokemon => this.props.addPokemon(pokemon))
+    this.setState()
   }
 
 
