@@ -81,12 +81,11 @@ class PokemonForm extends React.Component {
         <h3>Add a Pokemon!</h3>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
-<<<<<<< HEAD
             <Form.Input fluid label="Name" placeholder="Name" name="name" value={this.state.name} onChange={this.handleChange}/>
             <Form.Input fluid label="hp" placeholder="hp" name="hp" value={this.state.hp} onChange={this.handleChange}/>
             <Form.Input fluid label="Front Image URL" placeholder="url" name="frontUrl" value={this.state.frontUrl} onChange={this.handleChange}/>
             <Form.Input fluid label="Back Image URL" placeholder="url" name="backUrl" value={this.state.backUrl} onChange={this.handleChange}/>
-=======
+
             <Form.Input
               fluid
               label="Name"
@@ -119,7 +118,6 @@ class PokemonForm extends React.Component {
               value={backUrl}
               onChange={this.handleChange}
             />
->>>>>>> 562f6bbef3b873e2232a249879d567783b2229bd
           </Form.Group>
           <Form.Button>Submit</Form.Button>
         </Form>

@@ -5,7 +5,6 @@ import { Search } from 'semantic-ui-react'
 import _ from 'lodash'
 
 class PokemonPage extends React.Component {
-<<<<<<< HEAD
   state = {
     pokemons: [],
     search: ""
@@ -44,7 +43,7 @@ class PokemonPage extends React.Component {
         <br />
         <PokemonForm  addPokemon={this.addPokemon} />
       </div>
-=======
+
   constructor() {
     super()
       this.state = {
@@ -91,9 +90,7 @@ class PokemonPage extends React.Component {
           <PokemonCollection
           pokemons={filteredPokemon}
           /><br/>
-
         </div>
->>>>>>> 562f6bbef3b873e2232a249879d567783b2229bd
     )
   }
 }
